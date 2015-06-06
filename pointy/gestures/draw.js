@@ -40,23 +40,28 @@ window.Pointy = window.Pointy || {};
     var hand = frame.hands[0];
     var indexFinger, thumbFinger;
 
+    var allOtherFingersClosed = true;
+
     for (var f = 0; f < hand.fingers.length; f++) {
       if (hand.fingers[f].type == 1) {
         indexFinger = hand.fingers[f];
       }
-
-      if (hand.fingers[f].type == 0) {
-        thumbFinger = hand.fingers[f];
-      }
-
-      if (thumbFinger && indexFinger) {
-        break;
+      else {
+        if (hand.fingers[f].type == 0) {
+          thumbFinger = hand.fingers[f];
+        }
+        else {
+          if (hand.fingers[f].extended) {
+            allOtherFingersClosed = false;
+          }
+        }
       }
     }
 
-    if (!indexFinger || !thumbFinger || !indexFinger.extended) {
+    if (!indexFinger || !thumbFinger || !allOtherFingersClosed || !indexFinger.extended) {
       this.pointer.strokeColor.alpha = 0;
       this.pointer.fillColor.alpha = 0;
+      view.draw();
       return;
     }
 
