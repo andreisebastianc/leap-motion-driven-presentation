@@ -12,6 +12,10 @@ window.Pointy = window.Pointy || {};
         {
             gesture: Pointy.NextSlide,
             callback: Reveal.next
+        },
+        {
+            gesture: Pointy.PreviousSlide,
+            callback: Reveal.prev
         }
     ]
 
