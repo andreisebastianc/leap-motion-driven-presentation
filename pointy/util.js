@@ -23,4 +23,12 @@ Util.getFingerName = function (fingerType) {
     return Util.FingerByType[fingerType];
 }
 
+Util.setTransitionZoom = function () {
+    Reveal.configure({transition: 'zoom'});
+}
+
+Util.setTransitionSlide = function () {
+    Reveal.configure({transition: 'slide'});
+}
+
 window.Pointy.Util = Util;
