@@ -1,14 +1,14 @@
 window.Pointy = window.Pointy || {};
 
 (function () {
-    function NextSlide() {
+    function PreviousSlide() {
         Base.call(this);
         this.handWasMoving = false;
     }
 
-    NextSlide.prototype = Object.create(BaseState.prototype);
+    PreviousSlide.prototype = Object.create(BaseState.prototype);
 
-    NextSlide.prototype.isMatch = function (frame) {
+    PreviousSlide.prototype.isMatch = function (frame) {
         var i;
         var l;
         var v;
@@ -28,13 +28,13 @@ window.Pointy = window.Pointy || {};
             normal = Math.abs(hand.palmNormal[0]);
 
             if ( hand.type === 'right' ) {
-                if ( normal > 0.9 ) {
+                if ( normal < 0.3 ) {
                     rightCondition = true;
                 }
             }
 
             if ( hand.type === 'left' ) {
-                if ( normal < 0.3 ) {
+                if ( normal > 0.9 ) {
                     leftCondition = true;
                 }
             }
@@ -44,19 +44,19 @@ window.Pointy = window.Pointy || {};
         return rightCondition && leftCondition;
     }
 
-    NextSlide.prototype.handIsMoving = function(hand) {
+    PreviousSlide.prototype.handIsMoving = function(hand) {
         var movement = hand.translation(this.frame);
         if ( movement[0] > 2 ) {
             return true;
         }
     };
 
-    NextSlide.prototype.clearState = function () {
+    PreviousSlide.prototype.clearState = function () {
         BaseState.prototype.clearState.call(this);
         this.handWasMoving = false;
     }
 
-    NextSlide.prototype.updateState = function (frame) {
+    PreviousSlide.prototype.updateState = function (frame) {
         if ( frame.hands.length < 2 ) {
             return false;
         }
@@ -74,12 +74,6 @@ window.Pointy = window.Pointy || {};
             normal = Math.abs(hand.palmNormal[0]);
 
             if ( hand.type === 'left' ) {
-                if ( normal > 0.5 ) {
-                    return Pointy.States.DISCARDED;
-                }
-            }
-
-            if ( hand.type === 'right' ) {
                 isMoving = this.handIsMoving(hand);
 
                 if ( normal > 0.5 ) {
@@ -95,11 +89,18 @@ window.Pointy = window.Pointy || {};
                 } else {
                     return Pointy.States.DISCARDED;
                 }
+                
+            }
+
+            if ( hand.type === 'right' ) {
+                if ( normal > 0.5 ) {
+                    return Pointy.States.DISCARDED;
+                }
             }
         }
 
         return Pointy.States.PENDING;
     };
 
-    window.Pointy.NextSlide = new NextSlide();
+    window.Pointy.PreviousSlide = new PreviousSlide();
 }());
