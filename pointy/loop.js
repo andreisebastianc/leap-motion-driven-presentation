@@ -20,10 +20,11 @@ window.Pointy = window.Pointy || {};
             var state;
 
             if ( executing ) {
-                state = executing.callback.updateState(frame);
+                state = executing.gesture.updateState(frame);
                 console.log(state);
 
                 if ( state !== Pointy.States.PENDING ) {
+                    executing.gesture.clearState();
                     executing = null;
                 }
             } else {
