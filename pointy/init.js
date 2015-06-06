@@ -1,6 +1,7 @@
 var scripts = [
     'http://js.leapmotion.com/leap-0.6.3.min.js',
     'pointy/util.js',
+    'pointy/gestures/possible-states.js',
     'pointy/base-state.js',
     'pointy/gestures/next-slide.js',
     'pointy/gestures/draw.js',

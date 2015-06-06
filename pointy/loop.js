@@ -8,21 +8,32 @@ window.Pointy = window.Pointy || {};
     var executing = null;
     var loop;
 
+    var gestures = [
+        {
+            gesture: Pointy.NextSlide,
+            callback: function () { debugger; }
+        }
+    ]
+
     Loop.prototype.start = function() {
         Leap.loop(this._options, function (frame) {
+            var state;
+
             if ( executing ) {
-                if ( !executing.isTakingPlace(frame) ) {
-                    // handle gesture that took place
-                    // clean current gesture
+                state = executing.callback.updateState(frame);
+                console.log(state);
+
+                if ( state !== Pointy.States.PENDING ) {
                     executing = null;
                 }
-                return;
-            }
-
-            if ( Pointy.NextSlide.isMatch(frame) ) {
-                Pointy.NextSlide.start();
-                executing = Pointy.NextSlide;
-                debugger;
+            } else {
+                for (var i = 0, l = gestures.length; i < l; i ++) {
+                    var v = gestures[i];
+                    if ( v.gesture.isMatch(frame) ) {
+                        v.gesture.start(frame, v.callback);
+                        executing = v;
+                    }
+                }
             }
 
             Pointy.Draw.isMatch(frame);
