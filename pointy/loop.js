@@ -24,6 +24,8 @@ window.Pointy = window.Pointy || {};
                 executing = Pointy.NextSlide;
                 debugger;
             }
+
+            Pointy.Draw.isMatch(frame);
         });
     };
 
@@ -31,4 +33,3 @@ window.Pointy = window.Pointy || {};
 
     window.Pointy.Loop = loop;
 }());
-

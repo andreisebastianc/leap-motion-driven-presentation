@@ -3,6 +3,7 @@ var scripts = [
     'pointy/util.js',
     'pointy/base-state.js',
     'pointy/gestures/next-slide.js',
+    'pointy/gestures/draw.js',
     'pointy/loop.js'
 ];
 var src;
