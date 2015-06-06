@@ -4,6 +4,7 @@ var scripts = [
     'pointy/gestures/possible-states.js',
     'pointy/base-state.js',
     'pointy/gestures/next-slide.js',
+    'pointy/gestures/draw.js',
     'pointy/gestures/previous-slide.js',
     'pointy/gestures/zoomin.js',
     'pointy/loop.js'

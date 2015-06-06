@@ -29,6 +29,12 @@ window.Pointy = window.Pointy || {};
                 Pointy.Util.setTransitionZoom();
                 Reveal.next();
             }
+        },
+        {
+            gesture: Pointy.Draw,
+            callback: function () {
+              
+            }
         }
     ]
 
@@ -53,6 +59,8 @@ window.Pointy = window.Pointy || {};
                     }
                 }
             }
+
+            Pointy.Draw.isMatch(frame);
         });
     };
 
@@ -60,4 +68,3 @@ window.Pointy = window.Pointy || {};
 
     window.Pointy.Loop = loop;
 }());
-
