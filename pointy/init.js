@@ -1,6 +1,8 @@
 var scripts = [
     'http://js.leapmotion.com/leap-0.6.3.min.js',
     'pointy/util.js',
+    'pointy/base-state.js',
+    'pointy/gestures/next-slide.js',
     'pointy/loop.js'
 ];
 var src;

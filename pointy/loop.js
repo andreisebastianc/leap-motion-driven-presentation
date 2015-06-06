@@ -1,28 +1,34 @@
-window.Pointy = window.pointy || {};
+window.Pointy = window.Pointy || {};
 
-function Loop (options) {
-    this._options = options || { enableGestures: true };
-}
+(function iife () {
+    function Loop (options) {
+        this._options = options || { enableGestures: true };
+    }
 
+    var executing = null;
+    var loop;
 
-Loop.prototype.start = function() {
-    Leap.loop(this._options, function (frame) {
-        var i;
-        var l;
-        var v;
-        var hand;
-        var res = '';
+    Loop.prototype.start = function() {
+        Leap.loop(this._options, function (frame) {
+            if ( executing ) {
+                if ( !executing.isTakingPlace(frame) ) {
+                    // handle gesture that took place
+                    // clean current gesture
+                    executing = null;
+                }
+                return;
+            }
 
-        for (i = 0, l = frame.hands.length; i < l; i ++) {
-            hand = frame.hands[i];
-            res += ' ' + hand.type;
-            res += ' ' + hand.palmNormal;
-        }
+            if ( Pointy.NextSlide.isMatch(frame) ) {
+                Pointy.NextSlide.start();
+                executing = Pointy.NextSlide;
+                debugger;
+            }
+        });
+    };
 
-        console.log(res);
-    });
-};
+    loop = new Loop().start();
 
-new Loop().start();
+    window.Pointy.Loop = loop;
+}());
 
-window.Pointy.Loop = Loop;
