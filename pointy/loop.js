@@ -11,7 +11,7 @@ window.Pointy = window.Pointy || {};
     var gestures = [
         {
             gesture: Pointy.NextSlide,
-            callback: function () { debugger; }
+            callback: Reveal.next
         }
     ]
 
