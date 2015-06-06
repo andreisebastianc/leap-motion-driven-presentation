@@ -11,11 +11,24 @@ window.Pointy = window.Pointy || {};
     var gestures = [
         {
             gesture: Pointy.NextSlide,
-            callback: Reveal.next
+            callback: function () {
+                Pointy.Util.setTransitionSlide();
+                Reveal.next();
+            }
         },
         {
             gesture: Pointy.PreviousSlide,
-            callback: Reveal.prev
+            callback: function () {
+                Pointy.Util.setTransitionSlide();
+                Reveal.prev();
+            }
+        },
+        {
+            gesture: Pointy.ZoomIn,
+            callback: function () {
+                Pointy.Util.setTransitionZoom();
+                Reveal.next();
+            }
         }
     ]
 
