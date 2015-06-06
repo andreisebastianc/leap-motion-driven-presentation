@@ -18,4 +18,9 @@ BaseState.prototype.updateState = function() {
     throw new Error();
 };
 
+BaseState.prototype.clearState = function () {
+    this.frame = null;
+    this.callback = null;
+}
+
 window.Pointy.BaseSTate = BaseState;

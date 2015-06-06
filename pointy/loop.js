@@ -24,6 +24,7 @@ window.Pointy = window.Pointy || {};
                 console.log(state);
 
                 if ( state !== Pointy.States.PENDING ) {
+                    executing.gesture.clearState();
                     executing = null;
                 }
             } else {

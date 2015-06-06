@@ -51,6 +51,11 @@ window.Pointy = window.Pointy || {};
         }
     };
 
+    NextSlide.prototype.clearState = function () {
+        BaseState.prototype.clearState.call(this);
+        this.handWasMoving = false;
+    }
+
     NextSlide.prototype.updateState = function (frame) {
         if ( frame.hands.length < 2 ) {
             return false;
