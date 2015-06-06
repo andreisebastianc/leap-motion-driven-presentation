@@ -74,7 +74,7 @@ window.Pointy = window.Pointy || {};
             normal = Math.abs(hand.palmNormal[0]);
 
             if ( hand.type === 'left' ) {
-                if ( normal > 0.3 ) {
+                if ( normal > 0.5 ) {
                     return Pointy.States.DISCARDED;
                 }
             }
@@ -82,8 +82,11 @@ window.Pointy = window.Pointy || {};
             if ( hand.type === 'right' ) {
                 isMoving = this.handIsMoving(hand);
 
-                if ( normal > 0.7 ) {
+                if ( normal > 0.5 ) {
                     if ( this.handWasMoving && !isMoving ) {
+                        if ( this.callback ) {
+                            this.callback();
+                        }
                         return Pointy.States.DONE;
                     }
                     else if ( isMoving ) {
