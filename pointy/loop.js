@@ -20,7 +20,7 @@ window.Pointy = window.Pointy || {};
             var state;
 
             if ( executing ) {
-                state = executing.updateState(frame);
+                state = executing.callback.updateState(frame);
                 console.log(state);
 
                 if ( state !== Pointy.States.PENDING ) {
